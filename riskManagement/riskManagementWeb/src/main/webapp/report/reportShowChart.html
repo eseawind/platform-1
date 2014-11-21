@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<link href="lib/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
+<script src="lib/ligerUI/js/plugins/ligerForm.js" type="text/javascript"></script>
+<script src="lib/ligerUI/js/plugins/ligerDateEditor.js" type="text/javascript"></script>
+<script src="lib/ligerUI/js/plugins/ligerComboBox.js" type="text/javascript"></script>
+<script src="lib/ligerUI/js/plugins/ligerCheckBox.js" type="text/javascript"></script>
+<script src="lib/ligerUI/js/plugins/ligerButton.js" type="text/javascript"></script>
+<script src="lib/ligerUI/js/plugins/ligerDialog.js" type="text/javascript"></script>
+<script src="lib/ligerUI/js/plugins/ligerRadio.js" type="text/javascript"></script>
+<script src="lib/ligerUI/js/plugins/ligerSpinner.js" type="text/javascript"></script>
+<script src="lib/ligerUI/js/plugins/ligerTextBox.js" type="text/javascript"></script>
+<script src="lib/ligerUI/js/plugins/ligerMenu.js" type="text/javascript"></script>
+<script src="lib/ligerUI/js/plugins/ligerMenuBar.js" type="text/javascript"></script>
+<script type="text/javascript" src="report/js/addressLinkage.js"></script>
+ <link rel="stylesheet" href="report/css/report.css"/>
+<!--引入Jslider-->
+<link rel="stylesheet" href="jslider/css/jslider.css" type="text/css">
+<link rel="stylesheet" href="jslider/css/jslider.plastic.css" type="text/css">
+<script type="text/javascript" src="jslider/js/jshashtable-2.1_src.js"></script>
+<script type="text/javascript" src="jslider/js/jquery.numberformatter-1.2.3.js"></script>
+<script type="text/javascript" src="jslider/js/tmpl.js"></script>
+<script type="text/javascript" src="jslider/js/jquery.dependClass-0.1.js"></script>
+<script type="text/javascript" src="jslider/js/draggable-0.1.js"></script>
+<script type="text/javascript" src="jslider/js/jquery.slider.js"></script>
+
+<script type="text/javascript">
+/*
+ 导出报表 ,图表类只提供PDF
+ */
+var menu1 = { width: 100, items:
+        [
+            {
+                text: '导出', children:
+                    [
+                        { text: 'pdf', id: 'pdf', click: itemclick }
+                    ]
+            }
+        ]
+};
+$(function ()
+{
+    //菜单条
+    $("#topmenu").ligerMenuBar({items: [
+        { text: '文件', menu:menu1}
+    ]
+    });
+});
+function exportReportCallback(data1){
+    if(data1.code==200){
+        $.ligerDialog.success('操作成功')
+    }
+}
+function itemclick(item)
+{
+    if(item.id)
+    {
+        switch(item.id)
+        {
+            case 'upload':
+            {
+            }
+            default:
+            {
+                var type=item.text;
+                var province = $("#province").val()==''?' ':$("#province").val();
+                var city = $("#city").val()==''?' ':$("#city").val();
+                var area = $("#area").val()==''?' ': $("#area").val();
+                var data=type+","+province+","+city+","+area;
+                location.href="rs/report/exportChartReport/data="+encodeURI(data);
+            }
+        }
+    }
+}
+/*
+ load页面的显示报表全国数据
+ */
+function loadReportCallback(data1){
+    if(data1.code==200){
+        $.ligerDialog.success('操作成功')
+    }
+}
+$("#reportresult").load("rs/report/showChinaChart",null,loadReportCallback,"json");
+/*
+ 提交页面的查询报表数据
+ */
+$("#submitBtn").click(function(){
+    $("#reportresult").html();
+    if($("#province").val()!="请选择"&&$("#province").val()!="")
+    {
+        if($("#city").val()!="请选择"&&$("#city").val()!="")
+        {
+           if($("#area").val()!="请选择"&&$("#area").val()!="")
+           {
+               $("#reportresult").load("rs/report/showAreaRiskValueByProvinceCityArea",{"province":$("#province").val(),"city":$("#city").val(),"area":$("#area").val()}
+                       ,loadReportCallback,"json") ;
+           }
+            else
+           {
+               $("#reportresult").load("rs/report/showCityRiskValueByProvince",{"province":$("#province").val(),"city":$("#city").val()},loadReportCallback,"json") ;
+           }
+        }
+        else
+        {
+            $("#reportresult").load("rs/report/showProvinceRiskValue",{"province":$("#province").val()},loadReportCallback,"json") ;
+        }
+    }
+    else
+    {
+        $("#reportresult").load("rs/report/showChinaChart",null,loadReportCallback,"json");
+    }
+});
+</script>
+</head>
+<body>
+<div id="topmenu" class="l-menubar"/>
+<div id="queryccondition">
+        <div id="linkagearea" >
+            <span id= "pcauarea">
+                <span>省:</span>
+                <span id="provincesearch" class="l_combobox">
+                    <input type="text" readonly="true" id="province">
+                </span>
+                <span>市:</span>
+                <span id="citysearch" class="l_combobox">
+                    <input type="text" readonly="true" id="city">
+                </span>
+                <span>区域:</span>
+                <span id="areasearch" class="l_combobox">
+                    <input type="text" readonly="true" id="area">
+                </span>
+                </span>
+              <span>
+                <input type="button" value="提交" id="submitBtn" class="l-button l-button-submit" />
+            </span>
+        </div>
+</div>
+<div id="reportresultshow" >
+    <div id="reportresult" ></div>
+</div>
+<!--  数据统计代码 -->
+</body>
+</html>

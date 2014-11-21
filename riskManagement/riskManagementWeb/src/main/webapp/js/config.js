@@ -1,0 +1,125 @@
+(function($){
+    $.URL = {
+        "power":{
+            "add":"rs/power/add",
+            "update":"rs/power/update",
+            "delete":"rs/power/delete",
+            "list":"rs/power/list"
+        }  ,
+        "address":{
+            "getCityByProvince"  :"rs/address/getCityByProvince" ,
+            "findIdByArea"  :"rs/address/findByArea/{province},{city},{area}",
+            "getProvinceList":"rs/address/getProvinceList",
+            "getAreaByProvinceAndCity":"rs/address/getAreaByProvinceAndCity"
+        },
+        "report":
+        {
+            "showCraneReport" :"rs/report/showCraneReport",
+            "exportCraneReport":"rs/report/exportCraneReport"
+        }  ,
+        "craneinspectreport":
+        {
+            "getUnitaddressByArea" :"rs/craneinspectreport/getUnitaddressByArea",
+            "getAreaInfoByUnitAddress":"rs/craneinspectreport/getAreaInfoByUnitAddress",
+            "getCraneInspectReportInfoByAddressAndEquipment":"rs/craneinspectreport/getCraneInspectReportInfoByAddressAndEquipment",
+            "getAreaInfo":"rs/craneinspectreport/getAreaInfo",
+            "showRiskRank":"rs/craneinspectreport/showRiskRank",
+            "showRiskRankByValueRange":"rs/craneinspectreport/showRiskRankByValueRange",
+            "getOneUnitAddressInfo":"rs/craneinspectreport/getOneUnitAddressInfo",
+            "list":"rs/craneinspectreport/list",
+            "upload" :"rs/craneinspectreport/upload",
+            "addRepeat":"rs/craneinspectreport/addRepeat",
+            "delete":"rs/craneinspectreport/delete",
+            "update":"rs/craneinspectreport/update",
+            "getOneUnitAddressInfo":"rs/craneinspectreport/getOneUnitAddressInfo",
+            "getCraneInspectReportInfoById":"rs/craneinspectreport/getCraneInspectReportInfoById",
+            "getCraneInspectReportInfoFromCircle":"rs/craneinspectreport/getCraneInspectReportInfoFromCircle",
+            "getEquipmentVarietyList":"rs/craneinspectreport/getEquipmentVarietyList",
+            "getCraneInspectReportInfoFromCircle":"rs/craneinspectreport/getCraneInspectReportInfoFromCircle",
+            "getProvinceAvgRiskValue":"rs/craneinspectreport/getProvinceAvgRiskValue",
+            "getCityAvgRiskValueByProvince":"rs/craneinspectreport/getCityAvgRiskValueByProvince",
+            "getAreaAvgRiskValueByProvinceAndCity":"rs/craneinspectreport/getAreaAvgRiskValueByProvinceAndCity",
+            "fuzzyQuery":"rs/craneinspectreport/fuzzyQuery",
+            "fuzzyQueryByUnitAddress":"rs/craneinspectreport/fuzzyQueryByUnitAddress",
+            "fuzzyQueryByUserPoint":"rs/craneinspectreport/fuzzyQueryByUserPoint",
+            "fuzzyQueryBySafeManager":"rs/craneinspectreport/fuzzyQueryBySafeManager",
+            "fuzzyQueryByEquipmentVariety":"rs/craneinspectreport/fuzzyQueryByEquipmentVariety",
+            "fuzzyQueryByManufactureUnit":"rs/craneinspectreport/fuzzyQueryByManufactureUnit",
+            "getCityRiskRankFormRiskRange":"rs/craneinspectreport/getCityRiskRankFormRiskRange",
+            "getAreaRiskRankFormRiskRange":"rs/craneinspectreport/getAreaRiskRankFormRiskRange"  ,
+
+            "getCraneInfoByFuzzyUnitAddress": "rs/craneinspectreport/getCraneInfoByFuzzyUnitAddress" ,
+            "getCraneInfoByFuzzyManufactureUnit" :"rs/craneinspectreport/getCraneInfoByFuzzyManufactureUnit",
+            "getCraneInfoByFuzzyUsePoint":"rs/craneinspectreport/getCraneInfoByFuzzyUsePoint",
+            "getCraneInfoByFuzzySafeManager":"rs/craneinspectreport/getCraneInfoByFuzzySafeManager",
+            "getCraneInfoByFuzzyEquipmentVariety":"rs/craneinspectreport/getCraneInfoByFuzzyEquipmentVariety",
+            "getCraneInfoByFuzzyQuery":'rs/craneinspectreport/getCraneInfoByFuzzyQuery',
+            "getUseTimeList":'rs/craneinspectreport/getUseTimeList',
+            "getCraneInfoByCondition":'rs/craneinspectreport/getCraneInfoByCondition',
+            "getProvinceRiskRankFormRiskRange":'rs/craneinspectreport/getProvinceRiskRankFormRiskRange',
+            "getCityInfoByCondition":'rs/craneinspectreport/getCityInfoByCondition',
+            "getAreaInfoByCondition":'rs/craneinspectreport/getAreaInfoByCondition',
+            "listUploadedReport":'rs/craneinspectreport/listUploadedReport',
+            "calculateRiskValue":'rs/craneinspectreport/calculateRiskValue',
+            "calculateMaxValue":'rs/craneinspectreport/calculateMaxValue',
+            "updateRiskValueByChooseReport":'rs/craneinspectreport/updateRiskValueByChooseReport',
+            "calculateAreaRisk":'rs/craneinspectreport/calculateAreaRisk',
+            "calculateCityRisk":'rs/craneinspectreport/calculateCityRisk'
+        },
+        /*"authority":{
+            "add":"rs/authority/add"
+        },*/
+        "user":{
+            "add":"rs/user/add",
+            "update":"rs/user/update",
+            "delete":"rs/user/delete",
+            "list":"rs/user/list",
+            "getId":"rs/user/getIdByName"
+        },
+        "authority":{
+             "add":"rs/authority/add",
+             "update":"rs/authority/update",
+             "delete":"rs/authority/delete",
+            "list":"rs/authority/list"
+        },
+        "userAuthority":{
+              "add":"rs/userAuthority/add"
+        },
+        "riskColor":{
+           "list":"rs/riskColor/list",
+            "setColor":"rs/riskColor/setColor",
+            "getRiskValueList":"rs/riskColor/getRiskValueList",
+            "setColor":"rs/riskColor/setColor"
+        },
+        "dataRule":{
+            "add":"rs/dataRule/addDataRole",
+            "list":"rs/dataRule/list",
+            "listAddress":"rs/dataRule/listAddress",
+            "listProvince":"rs/dataRule/listProvince",
+            "delete":"rs/dataRule/delete",
+            "update":"rs/dataRule/updateDataRole"
+        },
+        "dataRuleAddress":{
+            "getProvinceAndColorWithDataRole":"rs/dataRuleAddress/getProvinceAndColorWithDataRole",
+            "getCityAndColorWithDataRole":"rs/dataRuleAddress/getCityAndColorWithDataRole",
+            "getAreaAndColorWithDataRole":"rs/dataRuleAddress/getAreaAndColorWithDataRole",
+            "getAddressesIdBydRoleName":"rs/dataRuleAddress/getAddressIdBydRoleName",
+            "getProvinceInfoWithDataRuleByCondition":"rs/dataRuleAddress/getProvinceInfoWithDataRuleByCondition",
+            "getProvinceListWithDataRole":"rs/dataRuleAddress/getProvinceListWithDataRole",
+            "calculateProvinceRisk":"rs/dataRuleAddress/calculateProvinceRisk"
+        },
+        "userDataRole":{
+            "add":"rs/userDataRole/add",
+            "update":"rs/userDataRole/update",
+            "delete":"rs/userDataRole/delete",
+            "list":"rs/userDataRole/list"
+        },
+        "riskModel":{
+            "add":"rs/riskModel/add",
+            "update":"rs/riskModel/update",
+            "delete":"rs/riskModel/delete",
+            "list":"rs/riskModel/list",
+            "getClassNameFromPackage":"rs/riskModel/getClassNameFromPackage"
+        }
+    }
+})(jQuery);
